@@ -5,8 +5,11 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
 import java.io.File;
 
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
@@ -239,6 +242,22 @@ public class PracticeFormPage extends BasePage {
 
             uploadPicture.sendKeys(imgPath);
             System.out.printf("✅ Image: [%s]%n", imgPath);
+
+            String uploadedFileNameWithPath = uploadPicture.getAttribute("value");  // имя файла, которое отобразилось в поле
+
+            String uploadedFileName = Paths.get(uploadedFileNameWithPath).getFileName().toString(); // получили только имя, без полного пути
+
+            String expectedFileName = file.getName();  // ожидаемое имя файла
+
+            //System.out.println(uploadedFileName);
+           // System.out.println(expectedFileName);
+
+            // shouldHaveText(uploadPicture, expectedFileName, 5000);
+
+            Assert.assertEquals(expectedFileName, uploadedFileName);
+
+            System.out.printf("✅ File name verified: [%s] matches uploaded file%n", expectedFileName);
+
             return this;
 
         } catch (IllegalArgumentException e) {
