@@ -243,7 +243,7 @@ public class PracticeFormPage extends BasePage {
             uploadPicture.sendKeys(imgPath);
             System.out.printf("✅ Image: [%s]%n", imgPath);
 
-            String uploadedFileNameWithPath = uploadPicture.getAttribute("value");  // имя файла, которое отобразилось в поле
+            String uploadedFileNameWithPath = uploadPicture.getAttribute("value"); // имя файла, которое отобразилось в поле на странице
 
             String uploadedFileName = Paths.get(uploadedFileNameWithPath).getFileName().toString(); // получили только имя, без полного пути
 
@@ -253,7 +253,7 @@ public class PracticeFormPage extends BasePage {
            // System.out.println(expectedFileName);
             // shouldHaveText(uploadPicture, expectedFileName, 5000);
 
-            Assert.assertEquals(expectedFileName, uploadedFileName);
+            Assert.assertEquals(expectedFileName, uploadedFileName); // сравниваем
 
             System.out.printf("✅ File name verified: [%s] matches uploaded file%n", expectedFileName);
 
