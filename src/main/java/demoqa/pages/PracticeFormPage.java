@@ -251,7 +251,6 @@ public class PracticeFormPage extends BasePage {
 
             //System.out.println(uploadedFileName);
            // System.out.println(expectedFileName);
-
             // shouldHaveText(uploadPicture, expectedFileName, 5000);
 
             Assert.assertEquals(expectedFileName, uploadedFileName);
