@@ -1,0 +1,3 @@
+13:26:50.122 [main] INFO  demoqa.core.TestBase -- Test is started: [loginPositiveTest]
+13:26:52.022 [main] INFO  i.g.b.wdm.online.Downloader -- Downloading https://msedgewebdriverstorage.blob.core.windows.net/edgewebdriver/133.0.3065.82/edgedriver_win64.zip
+13:26:55.646 [main] INFO  i.g.b.wdm.online.Downloader -- Extracting driver from compressed file edgedriver_win64.zip

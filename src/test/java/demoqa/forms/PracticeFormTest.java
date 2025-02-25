@@ -44,7 +44,7 @@ public class PracticeFormTest extends TestBase {
                 .enterSubjects(new String[] {"Maths", "English"})
                 .chooseHobbies(new String[] {"Sports","Music"})
                 .uploadPicture("C:\\Users\\podle\\Pictures\\Image20250221114825.png")
-                .enterCurrentAddress("Selezneva, Bristol, UK")
+                .enterCurrentAddress("Bristol, UK")
                 .enterState("NCR")
                 .enterCity("Delhi")
                 .submitForm()

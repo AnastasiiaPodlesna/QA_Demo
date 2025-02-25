@@ -304,8 +304,12 @@ public class PracticeFormPage extends BasePage {
     @FindBy(id = "submit")
     WebElement submitButton;
 
+    @FindBy(id = "closeLargeModal")
+    WebElement closeForm;
+
     public PracticeFormPage submitForm() {
-        wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
+        click(submitButton); // подтвердили заполненную форму кликом по кнопке
+        click(closeForm); // закрыли заполненную форму кликом по кнопке
         return this;
     }
 
