@@ -3,6 +3,7 @@ package demoqa.pages;
 import demoqa.core.BasePage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -14,7 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PracticeFormPage extends BasePage {
-    public PracticeFormPage(WebDriver driver, WebDriverWait wait) {
+    public PracticeFormPage(WebDriver driver,
+            WebDriverWait wait) {
         super(driver, wait);
     }
 
@@ -48,10 +50,10 @@ public class PracticeFormPage extends BasePage {
             type(userEmail, email);
             type(userNumber, number);
 
-            System.out.printf("✅ Personal data: [%s], [%s], [%s], [%s]%n",name,surName,email, number);
+            System.out.printf("✅ Personal data: [%s], [%s], [%s], [%s]%n", name, surName, email, number);
 
         } catch (IllegalArgumentException e) {
-            System.out.println("⛔ Error:"  + e.getMessage());
+            System.out.println("⛔ Error:" + e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -80,7 +82,7 @@ public class PracticeFormPage extends BasePage {
         //type(dateOfBirthInput, date);
         click(dateOfBirthInput);
 
-        if (System.getProperty("os.name").contains("Mac")){
+        if (System.getProperty("os.name").contains("Mac")) {
             dateOfBirthInput.sendKeys(Keys.COMMAND, "a");
         } else {
             dateOfBirthInput.sendKeys(Keys.CONTROL, "a");
@@ -91,7 +93,9 @@ public class PracticeFormPage extends BasePage {
     }
     //----------------- передаем дату как три строковых значения------------------------------------
 
-    public PracticeFormPage chooseDateAsThreeString(String day, String month, String year) {
+    public PracticeFormPage chooseDateAsThreeString(String day,
+            String month,
+            String year) {
         try {
             // Проверка на null или пустую строку
             if (day == null || day.isEmpty() || month == null || month.isEmpty() || year == null || year.isEmpty()) {
@@ -250,7 +254,7 @@ public class PracticeFormPage extends BasePage {
             String expectedFileName = file.getName();  // ожидаемое имя файла
 
             //System.out.println(uploadedFileName);
-           // System.out.println(expectedFileName);
+            // System.out.println(expectedFileName);
             // shouldHaveText(uploadPicture, expectedFileName, 5000);
 
             Assert.assertEquals(expectedFileName, uploadedFileName); // сравниваем
@@ -268,8 +272,52 @@ public class PracticeFormPage extends BasePage {
         }
     }
 
-}
+    @FindBy(id = "currentAddress")
+    WebElement currentAddress;
 
+    public PracticeFormPage enterCurrentAddress(String address) {
+        type(currentAddress, address);
+        System.out.printf("✅ Address: [%s]%n", address);
+        return this;
+    }
+
+    @FindBy(id = "react-select-3-input")
+    WebElement stateInput;
+
+    public PracticeFormPage enterState(String state) {
+        stateInput.sendKeys(state);
+        stateInput.sendKeys(Keys.ENTER);
+        System.out.printf("✅ Address state: [%s]%n", state);
+        return this;
+    }
+
+    @FindBy(id = "react-select-4-input")
+    WebElement cityInput;
+
+    public PracticeFormPage enterCity(String city) {
+        cityInput.sendKeys(city);
+        cityInput.sendKeys(Keys.ENTER);
+        System.out.printf("✅ Address city: [%s]%n", city);
+        return this;
+    }
+
+    @FindBy(id = "submit")
+    WebElement submitButton;
+
+    public PracticeFormPage submitForm() {
+        wait.until(ExpectedConditions.elementToBeClickable(submitButton)).click();
+        return this;
+    }
+
+    @FindBy(id = "example-modal-sizes-title-lg")
+    WebElement registrationModal;
+
+    public PracticeFormPage verifySuccessRegistration(String textToCheck) {
+        shouldHaveText(registrationModal, textToCheck, 5000);
+        System.out.printf("✅ Registration success: [%s]%n", textToCheck);
+        return this;
+    }
+}
 
 
 

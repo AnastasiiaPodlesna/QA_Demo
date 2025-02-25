@@ -6,6 +6,7 @@ import demoqa.pages.PracticeFormPage;
 import demoqa.pages.SidePanel;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.annotations.Parameters;
 
 public class PracticeFormTest extends TestBase {
     @BeforeMethod
@@ -24,11 +25,30 @@ public class PracticeFormTest extends TestBase {
                 .enterSubjects(new String[] {"Maths", "English"})
                 .chooseHobbies(new String[] {"Sports","Music"})
                 .uploadPicture("C:\\Users\\podle\\Pictures\\Image20250221114825.png")
-             //   .enterCurrentAddress("Selezneva, Bristol, UK")
-            //    .enterState("NCR")
-           //     .enterCity("Delhi")
-          //      .submitForm()
-           //     .verifySuccessRegistration("Thanks for submitting the form")
+                .enterCurrentAddress("Selezneva, Bristol, UK")
+                .enterState("NCR")
+                .enterCity("Delhi")
+                .submitForm()
+                .verifySuccessRegistration("Thanks for submitting the form")
+        ;
+    }
+
+    @Test
+    @Parameters({"firstName","lastName","email","phone"})
+    public void practiceFormParameterPositiveTest(String firstName, String lastName, String email, String phone) {
+        new PracticeFormPage(app.driver, app.wait)
+                .enterPersonalData(firstName, lastName, System.currentTimeMillis() + email, phone)
+                .selectGender("Female")
+                //  .chooseDateAsString("04 May 1965")
+                .chooseDateAsThreeString("04", "May", "1965")
+                .enterSubjects(new String[] {"Maths", "English"})
+                .chooseHobbies(new String[] {"Sports","Music"})
+                .uploadPicture("C:\\Users\\podle\\Pictures\\Image20250221114825.png")
+                .enterCurrentAddress("Selezneva, Bristol, UK")
+                .enterState("NCR")
+                .enterCity("Delhi")
+                .submitForm()
+                .verifySuccessRegistration("Thanks for submitting the form")
         ;
     }
 
